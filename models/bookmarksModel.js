@@ -71,10 +71,7 @@ const Bookmarks = {
     },
     updateBookmark : function(id,updates){
         return bookmarksCollection
-                .findOneAndUpdate({id: id}, {$set: updates}, { new: true })
-                .then( allBookmarks => {
-                    return allBookmarks;
-                })
+                .updateOne({id: id}, {$set: updates}, { new: true })
                 .catch( err => {
                     return err;
                 });

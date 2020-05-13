@@ -6,50 +6,14 @@ const uuid = require('uuid');
 const jsonParser = bodyParser.json();
 const apiKey = "2abbf7c3-245b-404f-9473-ade729ed4653";
 const { Bookmarks } = require( './models/bookmarksModel' );
-
-function keyManager(req, res, next){
-  console.log("imsiode");
-  let authKey = req.headers.authorization;
-  let bookapiKey = req.headers['book-api-key'];
-  let queryKey = req.query.apiKey;
-
-  if (!authKey && !bookapiKey && !queryKey){
-    res.statusMessage = "No key was provided";
-    return res.status(401).end();
-  }
-
-
-
-  if (authKey ){
-    if (authKey !== `Bearer ${apiKey}`){
-      res.statusMessage = "The key provided is not valid";
-      return res.status(401).end();
-    }
-  }
-
-
-  if (bookapiKey){
-    if(bookapiKey !== apiKey){
-      res.statusMessage = "The key provided is not valid";
-      return res.status(401).end();
-    }
-  }
-
-
-  if (queryKey){
-    if (queryKey !== apiKey){
-      res.statusMessage = "The key provided is not valid";
-      return res.status(401).end();
-    }
-  }
-
-
-
-  next();
-};
+const keyManager = require( './middleware/keyManager' );
+const cors = require( './middleware/cors' );
+const {DATABASE_URL, PORT} = require( './config' );
 
 const app = express();
 
+app.use( cors );
+app.use( express.static( "public" ) );
 app.use( morgan('dev'));
 app.use(keyManager);
 
@@ -87,6 +51,7 @@ let bookmarks = [
 ];
 
 app.get('/bookmarks', (req,res)=> {
+    // console.log("get todos");
     Bookmarks
       .getAllBookmarks().then( result => {
           return res.status( 200 ).json( result );
@@ -181,12 +146,7 @@ app.patch('/bookmark/:id', jsonParser , (req,res) => {
   Bookmarks
     .updateBookmark(req.params.id,changes)
     .then( result => {
-      if (!result.length){
-        res.statusMessage = "ID not found";
-        return res.status(404).end();
-      } else {
-        return res.status( 200 ).json( result );
-      }
+      return res.status( 200 ).json( result );
     })
     .catch( err => {
       res.statusMessage = "Something is wrong with the Database. Try again later.";
@@ -217,7 +177,7 @@ app.delete('/bookmark/:id', (req,res) => {
   // return res.status(404).end();
 });
 
-app.listen(8080, () => {
+app.listen(PORT, () => {
   console.log("Listening on port 8080");
   new Promise( ( resolve, reject ) => {
 
@@ -226,7 +186,7 @@ app.listen(8080, () => {
             useUnifiedTopology: true,
             useCreateIndex: true
         };
-        mongoose.connect( 'mongodb://localhost/bookmarksdb', settings, ( err ) => {
+        mongoose.connect( DATABASE_URL, settings, ( err ) => {
             if( err ){
                 return reject( err );
             }

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Bookmarks App</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <!-- <link href="./css/index.css" rel="stylesheet" type="text/css" /> -->
+    </head>
+    <body>
+      <div class="row">
+        <div class="col-3">
+          <div class="container mt-3">
+            <h2>POST new bookmark</h2>
+            <div class="col-12">
+              <form class="new-bookmark-form">
+                  <label for="bTitle">
+                      Title:
+                  </label>
+                  <input type="text" id="bTitle" class="form-control"/>
+                  <label for="bRating">
+                      Rating:
+                  </label>
+                  <input type="number" id="bRating" class="form-control"/>
+                  <label for="bURL">
+                      URL:
+                  </label>
+                  <input type="text" id="bURL" class="form-control"/>
+                  <label for="bDescription">
+                      Description:
+                  </label>
+                  <input type="text" id="bDescription" class="form-control"/>
+                  <button type="submit" class=" mt-3 btn btn-block btn-success">
+                      POST
+                  </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="container mt-3">
+            <h2>DELETE bookmark</h2>
+            <div class="col-12">
+              <form class="delete-bookmark-form">
+                  <label for="deleteID">
+                      ID:
+                  </label>
+                  <input type="text" id="deleteID" class="form-control"/>
+                  <button type="submit" class=" mt-3 btn btn-block btn-success">
+                      DELETE
+                  </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="container mt-3">
+            <h2>UPDATE bookmark</h2>
+            <div class="col-12">
+              <form class="update-bookmark-form">
+                <label for="updateID">
+                    ID:
+                </label>
+                <input type="text" id="updateID" class="form-control"/>
+                  <label for="updateTitle">
+                      Title:
+                  </label>
+                  <input type="text" id="updateTitle" class="form-control"/>
+                  <label for="updateRating">
+                      Rating:
+                  </label>
+                  <input type="number" id="updateRating" class="form-control"/>
+                  <label for="updateURL">
+                      URL:
+                  </label>
+                  <input type="text" id="updateURL" class="form-control"/>
+                  <label for="updateDescription">
+                      Description:
+                  </label>
+                  <input type="text" id="updateDescription" class="form-control"/>
+                  <button type="submit" class=" mt-3 btn btn-block btn-success">
+                      UPDATE
+                  </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="container mt-3">
+            <h2>GET by title</h2>
+            <div class="col-12">
+              <form class="get-bookmark-title-form">
+                  <label for="getTitle">
+                      Title:
+                  </label>
+                  <input type="text" id="getTitle" class="form-control"/>
+                  <button type="submit" class=" mt-3 btn btn-block btn-success">
+                      SEARCH
+                  </button>
+              </form>
+              <h4 class="mt-2">Resultados GET</h4>
+              <div class="mt-2 resultadosGet">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 p-3">
+          <h2>All the bookmarks</h2>
+          <div class="bookmarks-all">
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+        <!-- <form class="students-form">
+            <label>
+                Click the buttton to get the full list of students
+            </label>
+            <button id="submit-btn" type="submit">
+                Get students
+            </button>
+        </form>
+        <form class="add-student-form">
+            <label for="studentName">
+                Name:
+            </label>
+            <input type="text" id="studentName" />
+            <label for="studentID">
+                ID:
+            </label>
+            <input type="number" id="studentID" />
+            <button type="submit">
+                Add student
+            </button>
+        </form>
+        <section class="results">
+
+        </section> -->
+        <script src="./js/index.js"></script>
+    </body>
+</html>
